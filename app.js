@@ -24,6 +24,7 @@ var server = http.createServer(function(req, res) {
   proxy.web(req, res, {
     target: target,
     agent  : https.globalAgent,
+    xfwd: false,
     headers: {
       host: host
     }
