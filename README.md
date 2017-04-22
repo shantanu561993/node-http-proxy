@@ -1,3 +1,5 @@
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
 <p align="center">
   <img src="https://raw.github.com/nodejitsu/node-http-proxy/master/doc/logo.png"/>
 </p>
@@ -341,7 +343,7 @@ proxyServer.listen(8015);
 *  **cookieDomainRewrite**: rewrites domain of `set-cookie` headers. Possible values:
    * `false` (default): disable cookie rewriting
    * String: new domain, for example `cookieDomainRewrite: "new.domain"`. To remove the domain, use `cookieDomainRewrite: ""`.
-   * Object: mapping of domains to new domains, use `"*"` to match all domains.  
+   * Object: mapping of domains to new domains, use `"*"` to match all domains.
      For example keep one domain unchanged, rewrite one domain and remove other domains:
      ```
      cookieDomainRewrite: {
