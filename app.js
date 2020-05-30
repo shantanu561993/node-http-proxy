@@ -1,23 +1,4 @@
-/*
-  web-socket-proxy.js: Example of proxying over HTTP and WebSockets.
-  Copyright (c) 2013 - 2016 Charlie Robbins, Jarrett Cruger & the Contributors.
-  Permission is hereby granted, free of charge, to any person obtaining
-  a copy of this software and associated documentation files (the
-  "Software"), to deal in the Software without restriction, including
-  without limitation the rights to use, copy, modify, merge, publish,
-  distribute, sublicense, and/or sell copies of the Software, and to
-  permit persons to whom the Software is furnished to do so, subject to
-  the following conditions:
-  The above copyright notice and this permission notice shall be
-  included in all copies or substantial portions of the Software.
-  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-  NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-*/
+
 
 var util = require('util'),
     http = require('http'),
@@ -25,8 +6,22 @@ var util = require('util'),
     httpProxy = require('./lib/http-proxy');
 
 
+var proxy = new httpProxy.createProxyServer({
+  target: {
+    host: 'localhost',
+    port: 9015
+  }
+});
+var proxyServer = http.createServer(function (req, res) {
+  proxy.web(req, res);
+});
 
 //
-// Create a proxy server with node-http-proxy
+// Listen to the `upgrade` event and proxy the
+// WebSocket requests as well.
 //
-httpProxy.createServer({ target: 'ws://gpadvt.com:8080', ws: true }).listen(8014);
+proxyServer.on('upgrade', function (req, socket, head) {
+  proxy.ws(req, socket, head);
+});
+
+proxyServer.listen(8015);
