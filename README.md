@@ -1,4 +1,4 @@
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/shantanu561993/node-http-proxy)
 
 <p align="center">
   <img src="https://raw.github.com/nodejitsu/node-http-proxy/master/doc/logo.png"/>
