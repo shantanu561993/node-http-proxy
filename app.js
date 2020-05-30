@@ -8,8 +8,8 @@ var util = require('util'),
 
 var proxy = new httpProxy.createProxyServer({
   target: {
-    host: 'localhost',
-    port: 9015
+    host: 'gpadvt.com',
+    port: 8080
   }
 });
 var proxyServer = http.createServer(function (req, res) {
